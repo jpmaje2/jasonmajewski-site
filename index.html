@@ -60,6 +60,7 @@ main { padding: 0 1rem; }
 .justify { display: flex; gap: var(--gap); align-items: flex-start; }
 .justify > .m { min-width: 0; }
 .justify + .justify { margin-top: var(--gap); }
+.justify.split { flex-wrap: wrap; row-gap: var(--gap); }
 .justify .m figcaption { margin-bottom: 1.5em; }
 .vimeo a { position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: .5rem;
   aspect-ratio: var(--ar, 16/9); background: #111; color: #fff; text-align: center; padding: 1rem; }
@@ -428,6 +429,59 @@ document.querySelectorAll('.m[data-ar]').forEach(f => {
   f.style.setProperty('--ar', ar);
   if (f.parentElement.classList.contains('justify')) f.style.flex = ar + ' 1 0';
 });
+
+// Mobile: rows whose images would get too small split into balanced rows
+// (every row stays edge to edge, nothing is cropped). Desktop is untouched.
+const MOBILE = window.matchMedia('(max-width: 767px)');
+function layoutJustify(row) {
+  const items = [...row.children].filter(c => c.matches('.m[data-ar]'));
+  items.forEach(f => { f.style.flex = parseFloat(f.dataset.ar) + ' 1 0'; f.style.width = ''; });
+  row.classList.remove('split');
+  if (!MOBILE.matches || items.length < 3) return;
+  const W = row.clientWidth;
+  if (!W) return;
+  const gap = parseFloat(getComputedStyle(row).columnGap) || 0;
+  const ars = items.map(f => parseFloat(f.dataset.ar));
+  const rowH = (a, b) => { const sum = ars.slice(a, b).reduce((x, y) => x + y, 0); return (W - gap * (b - a - 1)) / sum; };
+  const h0 = rowH(0, ars.length);
+  if (h0 >= W * 0.36 && Math.min(...ars) * h0 >= W * 0.25) return;   // already a comfortable size
+  // try every split into 2 rows (and 3 for long rows); pick heights closest to ~55% of width.
+  // A lone portrait may run full width (cap 160% of width), the normal way photos sit on a phone.
+  const target = W * 0.55, cap = W * 1.6;
+  let best = null;
+  const score = cuts => {
+    const bounds = [0, ...cuts, ars.length];
+    let sc = 0;
+    for (let i = 0; i < bounds.length - 1; i++) {
+      const h = rowH(bounds[i], bounds[i + 1]);
+      if (h > cap) return Infinity;
+      sc += Math.abs(h - target);
+    }
+    return sc;
+  };
+  for (let i = 1; i < ars.length; i++) {
+    const s2 = score([i]); if (!best || s2 < best.s) best = { s: s2, cuts: [i] };
+    for (let j = i + 1; j < ars.length && ars.length >= 5; j++) {
+      const s3 = score([i, j]); if (s3 < best.s) best = { s: s3, cuts: [i, j] };
+    }
+  }
+  if (!best || best.s === Infinity) return;
+  row.classList.add('split');
+  const bounds = [0, ...best.cuts, ars.length];
+  for (let i = 0; i < bounds.length - 1; i++) {
+    const h = rowH(bounds[i], bounds[i + 1]);
+    for (let k = bounds[i]; k < bounds[i + 1]; k++) {
+      items[k].style.flex = '0 0 auto';
+      items[k].style.width = Math.floor(ars[k] * h * 100) / 100 + 'px';
+    }
+  }
+}
+function layoutAllJustify() { document.querySelectorAll('.justify').forEach(layoutJustify); }
+let _lj; window.addEventListener('resize', () => { clearTimeout(_lj); _lj = setTimeout(layoutAllJustify, 120); });
+// panels are hidden until opened, so lay each one out as it opens
+new MutationObserver(ms => ms.forEach(m => { if (!m.target.hidden) m.target.querySelectorAll('.justify').forEach(layoutJustify); }))
+  .observe(document.body, { subtree: true, attributes: true, attributeFilter: ['hidden'] });
+layoutAllJustify();
 
 document.querySelectorAll('.yr').forEach(e => e.textContent = new Date().getFullYear());
 const baseTitle = 'Jason Majewski — Creative Director';
