@@ -77,7 +77,14 @@ main { padding: 0 1rem; }
 
 /* Overlay project pages (Cargo "overlay" pages) */
 .ov { position: fixed; inset: 0; overflow-y: auto; z-index: 10; -webkit-overflow-scrolling: touch; }
-.ov.about { background: rgba(0,0,0,.1); }
+.ov.about { background: rgba(0,0,0,0); transition: background-color .35s ease; }
+.ov.about.in { background: rgba(0,0,0,.1); }
+/* Slide-up when a project opens (transform + opacity only: GPU-smooth, no layout work) */
+.ov .panel { transform: translateY(14vh); opacity: 0; will-change: transform, opacity;
+  transition: transform .6s cubic-bezier(.16,1,.3,1), opacity .4s ease; }
+.ov.in .panel { transform: none; opacity: 1; }
+.ov:not(.in) .panel { transition-duration: .25s, .2s; }
+@media (prefers-reduced-motion: reduce) { .ov .panel, .ov.about { transition: none; } }
 .ov .panel { margin-top: 15rem; background: #fff; padding: .8rem 1rem 6rem; min-height: calc(100vh - 15rem); }
 .ov .panel > .cols:first-child { margin-bottom: 1rem; }
 .close .x { display: inline-block; margin-left: .25em; transform: translateY(.02em); }
@@ -411,12 +418,19 @@ function route() {
   let shown = null;
   document.querySelectorAll('.ov').forEach(o => {
     const on = id && o.id === 'p-' + id;
-    o.hidden = !on;
-    if (on) shown = o;
-    if (!on) o.querySelectorAll('video').forEach(v => v.pause());
+    if (on) {
+      shown = o;
+      clearTimeout(o._t);
+      if (o.hidden) { o.hidden = false; o.scrollTop = 0; void o.offsetHeight; }  // reflow so the slide plays
+      o.classList.add('in');
+    } else if (!o.hidden) {
+      o.classList.remove('in');
+      o.querySelectorAll('video').forEach(v => v.pause());
+      o._t = setTimeout(() => { if (!o.classList.contains('in')) o.hidden = true; }, 260);
+    }
   });
   document.body.classList.toggle('locked', !!shown);
-  if (shown) { shown.scrollTop = 0; document.title = shown.dataset.title + ' — Jason Majewski'; }
+  if (shown) { document.title = shown.dataset.title + ' — Jason Majewski'; }
   else document.title = baseTitle;
 }
 function closeOv(e) {
