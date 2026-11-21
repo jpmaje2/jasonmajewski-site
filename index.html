@@ -136,6 +136,15 @@ img.fade-pending { opacity: 0; }
   .grid.settle > a { opacity: 1; transform: none; }
   .grid > a:hover .ti > img { transform: none; }
 }
+
+/* Holler: three square crops (Cargo 1:1 frames) */
+.sq3 { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: var(--gap); }
+.sq3 .m img { aspect-ratio: 1; object-fit: cover; height: auto; }
+/* Can Crock: vertical video beside two stacked landscapes, equal heights */
+.ff { display: grid; grid-template-columns: 1fr 1.146fr; gap: var(--gap); align-items: stretch; }
+.ff-r { display: grid; grid-template-rows: 1fr 1fr; gap: var(--gap); height: 0; min-height: 100%; }
+.ff-r .m { min-height: 0; }
+.ff-r .m img { width: 100%; height: 100%; object-fit: cover; }
 </style>
 </head>
 <body>
@@ -357,7 +366,7 @@ Yeah, no. No, yeah. It’s great. Ope, better let ya go now.<br />
 
 Copy - Coleman Larkin<br />
 Art Direction - Aaron Lugo<br />
-Design - Jalyn Clark</div><div class="col" style="--span:7"><gallery-freeform mobile-gutter="2rem"><figure class="m" data-ar="1.8318"><img loading="lazy" src="media/T2951409184307641809339793048411.webp" width="980" height="535" alt=""></figure><figure class="m" data-ar="0.8000"><video controls playsinline preload="none" data-poster="media/L2951410381077057079394373239643.webp" src="media/P2951408650089933434711178249051.mp4" width="1080" height="1350"></video></figure><figure class="m" data-ar="1.8318"><img loading="lazy" src="media/Z2951413256463289568870731383643.webp" width="980" height="535" alt=""></figure></gallery-freeform></div></div></div></section>
+Design - Jalyn Clark</div><div class="col" style="--span:7"><div class="ff"><div class="ff-l"><figure class="m" data-ar="0.8000"><video controls playsinline preload="none" data-poster="media/L2951410381077057079394373239643.webp" src="media/P2951408650089933434711178249051.mp4" width="1080" height="1350"></video></figure></div><div class="ff-r"><figure class="m" data-ar="1.8318"><img loading="lazy" src="media/T2951409184307641809339793048411.webp" width="980" height="535" alt=""></figure><figure class="m" data-ar="1.8318"><img loading="lazy" src="media/Z2951413256463289568870731383643.webp" width="980" height="535" alt=""></figure></div></div></div></div></div></section>
 <section class="ov" id="p-uk-healthcare" data-title="UK HealthCare" hidden><div class="panel"><div class="cols"><div class="col" style="--span:6"><b>UK HealthCare </b></div><div class="col" style="--span:2"></div><div class="col" style="--span:4"><div style="text-align: right"><a href="#" class="close">Close <span class="x">×</span></a></div></div></div><div class="cols stack"><div class="col" style="--span:4">
 Over the years I’ve led many campaigns for UK HealthCare, the leading academic medical center in Kentucky and among the top ranked hospitals in the country.<br />
 <br />
@@ -412,8 +421,7 @@ Moonbow has become the #1 selling cannabis gummy brand in the state.<br /><br />
 
 Copy - Coleman Larkin<br />
 Art Direction - Jenn Osborn, Nicole Kukurugya<br />
-Design - Claire Kirner</div><div class="col" style="--span:1"></div><div class="col" style="--span:7"><div class="grid"><figure class="m" data-ar="1.0000"><img srcset="media/M3229951871551738466879637848923-900w.webp 900w, media/M3229951871551738466879637848923.webp 1024w" sizes="(max-width: 767px) 100vw, 60vw" loading="lazy" src="media/M3229951871551738466879637848923.webp" width="1024" height="1024" alt=""></figure><figure class="m" data-ar="0.6669"><img srcset="media/F3229952205197998528064297927515-900w.webp 900w, media/F3229952205197998528064297927515.webp 1067w" sizes="(max-width: 767px) 100vw, 60vw" loading="lazy" src="media/F3229952205197998528064297927515.webp" width="1067" height="1600" alt=""></figure><figure class="m" data-ar="0.7469"><img srcset="media/L3229953019418835197530196706139-900w.webp 900w, media/L3229953019418835197530196706139.webp 1195w" sizes="(max-width: 767px) 100vw, 60vw" loading="lazy" src="media/L3229953019418835197530196706139.webp" width="1195" height="1600" alt=""></figure></div><br />
-<figure class="m" data-ar="1.7778"><img srcset="media/Q3229951353013762554904141923163-900w.webp 900w, media/Q3229951353013762554904141923163.webp 1600w" sizes="(max-width: 767px) 100vw, 60vw" loading="lazy" src="media/Q3229951353013762554904141923163.webp" width="1600" height="900" alt=""></figure></div></div></div></section>
+Design - Claire Kirner</div><div class="col" style="--span:1"></div><div class="col" style="--span:7"><div class="sq3"><figure class="m" data-ar="1.0000"><img srcset="media/M3229951871551738466879637848923-900w.webp 900w, media/M3229951871551738466879637848923.webp 1024w" sizes="(max-width: 767px) 100vw, 60vw" loading="lazy" src="media/M3229951871551738466879637848923.webp" width="1024" height="1024" alt=""></figure><figure class="m" data-ar="0.6669"><img srcset="media/F3229952205197998528064297927515-900w.webp 900w, media/F3229952205197998528064297927515.webp 1067w" sizes="(max-width: 767px) 100vw, 60vw" loading="lazy" src="media/F3229952205197998528064297927515.webp" width="1067" height="1600" alt=""></figure><figure class="m" data-ar="0.7469"><img srcset="media/L3229953019418835197530196706139-900w.webp 900w, media/L3229953019418835197530196706139.webp 1195w" sizes="(max-width: 767px) 100vw, 60vw" loading="lazy" src="media/L3229953019418835197530196706139.webp" width="1195" height="1600" alt=""></figure></div><span class="mgap"></span><figure class="m" data-ar="1.7778"><img srcset="media/Q3229951353013762554904141923163-900w.webp 900w, media/Q3229951353013762554904141923163.webp 1600w" sizes="(max-width: 767px) 100vw, 60vw" loading="lazy" src="media/Q3229951353013762554904141923163.webp" width="1600" height="900" alt=""></figure></div></div></div></section>
 <section class="ov" id="p-visitdublin" data-title="Visit Dublin" hidden><div class="panel"><div class="cols"><div class="col" style="--span:6"><b>Visit Dublin </b></div><div class="col" style="--span:2"></div><div class="col" style="--span:4"><div style="text-align: right"><a href="#" class="close">Close <span class="x">×</span></a></div></div></div><div class="cols stack"><div class="col" style="--span:4">No, not that Dublin. The one in...Ohio.<br />
 <br />
 ...And the city I grew up in.<br />
