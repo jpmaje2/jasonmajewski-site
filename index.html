@@ -61,17 +61,11 @@ main { padding: 0 1rem; }
 .justify > .m { min-width: 0; }
 .justify + .justify { margin-top: var(--gap); }
 .justify.split { flex-wrap: wrap; row-gap: var(--gap); }
-.justify .m figcaption { margin-bottom: 1.5em; }
-.vimeo a { position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: .5rem;
-  aspect-ratio: var(--ar, 16/9); background: #111; color: #fff; text-align: center; padding: 1rem; }
-.vimeo .play { width: 3.5rem; height: 3.5rem; border-radius: 50%; background: rgba(255,255,255,.15);
-  display: grid; place-items: center; font-size: 1.3rem; padding-left: .2rem; }
-.vimeo .vt { font-weight: 600; } .vimeo .vs { opacity: .6; font-size: .85rem; }
+.justify .m figcaption { margin-bottom: 1.5em; } .vimeo .vs { opacity: .6; font-size: .85rem; }
 
 .mgap { display: block; height: calc(var(--gap) * 2); }
 .justify + .mgap + .justify { }
 
-.vimeo-embed iframe { display: block; width: 100%; aspect-ratio: var(--ar, 16/9); height: auto; border: 0; background: #111; }
 
 /* Placeholder tile */
 .soon-box { aspect-ratio: 1; background: #f1f1f1; display: grid; place-items: center; color: rgba(0,0,0,.45); }
