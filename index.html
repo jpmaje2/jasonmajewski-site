@@ -136,10 +136,50 @@ img.fade-pending { opacity: 0; }
   .grid.settle > a { opacity: 1; transform: none; }
   .grid > a:hover .ti > img { transform: none; }
 }
+
+/* ---- Homepage statement (preview) ---- */
+.intro { padding: 0 1rem; margin: -1.5rem 0 4.5rem; }
+.intro-line { margin: 0; color: #000; font-weight: 300; letter-spacing: -0.025em; }
+.intro-line b, .intro-line .em { font-weight: 600; }
+/* A — Echo: big light type, the three kinds of work in bold, like the captions */
+.intro[data-v="a"] .intro-line { font-size: 4.4vw; line-height: 1.04; max-width: 78%; }
+.intro[data-v="a"] .w1, .intro[data-v="a"] .w2, .intro[data-v="a"] .w3 { font-weight: 600; }
+/* B — Punchline: same size, only the last phrase in bold */
+.intro[data-v="b"] .intro-line { font-size: 4.4vw; line-height: 1.04; max-width: 78%; }
+.intro[data-v="b"] .w3 { font-weight: 600; }
+/* C — Billboard: all light, full width, as big as it'll go */
+.intro[data-v="c"] .intro-line { font-size: 6.4vw; line-height: 1.0; letter-spacing: -0.035em; }
+/* D — Column: smaller, sits over the right two grid columns, caption-style bold */
+.intro[data-v="d"] { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); column-gap: var(--gap); }
+.intro[data-v="d"] .intro-line { grid-column: 2 / span 2; font-size: 2.6vw; line-height: 1.08; letter-spacing: -0.02em; }
+.intro[data-v="d"] .w3 { font-weight: 600; }
+@media (max-width: 767px) {
+  .intro { margin: -0.5rem 0 2.5rem; }
+  .intro[data-v] .intro-line { font-size: 2rem; max-width: none; line-height: 1.06; }
+  .intro[data-v="c"] .intro-line { font-size: 2.45rem; }
+  .intro[data-v="d"] { display: block; }
+  .intro[data-v="d"] .intro-line { font-size: 1.55rem; }
+}
+.intro.no-cd .cd { display: none; }
+.intro .mk { display: none; } .intro.no-cd .mk { display: inline; }
+/* arrive with the grid */
+.intro { transition: opacity .7s ease, transform .9s cubic-bezier(.16,1,.3,1); }
+.intro.pre { opacity: 0; transform: translateY(14px); }
+@media (prefers-reduced-motion: reduce) { .intro, .intro.pre { transition: none; opacity: 1; transform: none; } }
+/* preview-only switcher */
+.pv { position: fixed; left: 50%; bottom: 1rem; transform: translateX(-50%); z-index: 50; display: flex; gap: .35rem; align-items: center;
+  background: #111; color: #fff; padding: .4rem; border-radius: 999px; font-size: .85rem; box-shadow: 0 6px 24px rgba(0,0,0,.18); white-space: nowrap; }
+.pv button { font: inherit; color: inherit; background: transparent; border: 0; padding: .45rem .8rem; border-radius: 999px; cursor: pointer; }
+.pv button.on { background: #fff; color: #111; }
+.pv .sep { width: 1px; height: 1.2rem; background: rgba(255,255,255,.25); margin: 0 .2rem; }
+@media (max-width: 767px) { .pv { font-size: .8rem; } .pv button { padding: .4rem .6rem; } .pv .lbl { display: none; } }
 </style>
 </head>
 <body>
 <header class="hd"><div class="cols"><div class="col" style="--span:2"><b><a href="#">Jason</a> Majewski</b> <span class="role">Creative Director</span></div><div class="col" style="--span:2"></div><div class="col c" style="--span:5"><b><a href="#about">About</a></b></div><div class="col" style="--span:2"></div><div class="col r" style="--span:1"><b><a href="mailto:jasonm@teamcornett.com">Contact</a></b></div></div></header>
+<section class="intro" data-v="a">
+  <p class="intro-line"><span class="cd">Creative Director making </span><span class="mk">Making </span><span class="w1">smart work</span>, <span class="w2">stupid work</span>, and the occasional <span class="w3">stupid-smart work</span>.</p>
+</section>
 <main><div class="grid"><a href="#natural-light-treadmower"><figure class="m" data-ar="1.0000"><span class="ti"><img loading="eager" fetchpriority="high" srcset="media/Q3016408058861125694261201765211-720w.webp 720w, media/Q3016408058861125694261201765211.webp 1080w" sizes="(max-width: 767px) 50vw, 33vw" src="media/Q3016408058861125694261201765211.webp" width="1080" height="1080" alt=""></span><figcaption><b>Natural Light</b> Treadmower</figcaption></figure></a><a href="#busch-light-x-jack-links"><figure class="m" data-ar="1.0000"><span class="ti"><img loading="eager" fetchpriority="high" srcset="media/Y3016408736908097611603190514523-720w.webp 720w, media/Y3016408736908097611603190514523.webp 1080w" sizes="(max-width: 767px) 50vw, 33vw" src="media/Y3016408736908097611603190514523.webp" width="1080" height="1080" alt=""></span><figcaption><b>Busch Light x Jack Link’s</b> Always Good Together</figcaption></figure></a><a href="#natural-light-lawngerie"><figure class="m" data-ar="1.0000"><span class="ti"><img loading="eager" fetchpriority="high" srcset="media/M3016409038420129496385811678043-720w.webp 720w, media/M3016409038420129496385811678043.webp 1080w" sizes="(max-width: 767px) 50vw, 33vw" src="media/M3016409038420129496385811678043.webp" width="1080" height="1080" alt=""></span><figcaption><b>Natural Light</b> Lawngerie</figcaption></figure></a><a href="#stearns-foster-if-you-could-see"><figure class="m" data-ar="1.0000"><span class="ti"><img loading="lazy" srcset="media/L3145618279736119352589814891355-720w.webp 720w, media/L3145618279736119352589814891355.webp 1080w" sizes="(max-width: 767px) 50vw, 33vw" src="media/L3145618279736119352589814891355.webp" width="1080" height="1080" alt=""></span><figcaption><b>Stearns &#x26; Foster</b> If You Could See...</figcaption></figure></a><a href="#natural-light-coolshed"><figure class="m" data-ar="1.0000"><span class="ti"><img loading="lazy" srcset="media/B3016412774771248138108072395611-720w.webp 720w, media/B3016412774771248138108072395611.webp 1080w" sizes="(max-width: 767px) 50vw, 33vw" src="media/B3016412774771248138108072395611.webp" width="1080" height="1080" alt=""></span><figcaption><b>Natural Light </b>CoolShed</figcaption></figure></a><a href="#q-mixers-we-cant-fix"><figure class="m" data-ar="1.0017"><span class="ti"><img loading="lazy" srcset="media/R3017993006911968098120216118107-720w.webp 720w, media/R3017993006911968098120216118107.webp 1180w" sizes="(max-width: 767px) 50vw, 33vw" src="media/R3017993006911968098120216118107.webp" width="1180" height="1178" alt=""></span><figcaption><b>Q Mixers</b> We Can’t Fix... </figcaption></figure></a><a href="#natural-light-garageflage"><figure class="m" data-ar="1.0000"><span class="ti"><img loading="lazy" srcset="media/Q3016409369336271434661458117467-720w.webp 720w, media/Q3016409369336271434661458117467.webp 1080w" sizes="(max-width: 767px) 50vw, 33vw" src="media/Q3016409369336271434661458117467.webp" width="1080" height="1080" alt=""></span><figcaption><b>Natural Light </b>Garageflage</figcaption></figure></a><a href="#nerdwallet-pizza-on-a-turntable"><figure class="m" data-ar="1.0000"><span class="ti"><img loading="lazy" srcset="media/X3145619045829400733747493503835-720w.webp 720w, media/X3145619045829400733747493503835.webp 1080w" sizes="(max-width: 767px) 50vw, 33vw" src="media/X3145619045829400733747493503835.webp" width="1080" height="1080" alt=""></span><figcaption><b>NerdWallet</b> Pizza on a Turntable</figcaption></figure></a><a href="#cornett-brand-id"><figure class="m" data-ar="1.0000"><span class="ti"><img loading="lazy" srcset="media/Y3145618636311682297395447628635-720w.webp 720w, media/Y3145618636311682297395447628635.webp 1080w" sizes="(max-width: 767px) 50vw, 33vw" src="media/Y3145618636311682297395447628635.webp" width="1080" height="1080" alt=""></span><figcaption><b>Cornett</b> Brand ID</figcaption></figure></a><a href="#holler-cannabis-co-brand-id"><figure class="m" data-ar="1.0000"><span class="ti"><img loading="lazy" srcset="media/Y3145619262209708718360533959515-720w.webp 720w, media/Y3145619262209708718360533959515.webp 1080w" sizes="(max-width: 767px) 50vw, 33vw" src="media/Y3145619262209708718360533959515.webp" width="1080" height="1080" alt=""></span><figcaption><b>Holler Cannabis Co. </b> Brand ID</figcaption></figure></a><a href="#busch-light-can-crock"><figure class="m" data-ar="1.0000"><span class="ti"><img loading="lazy" srcset="media/Z3147533706372130603704704336731-720w.webp 720w, media/Z3147533706372130603704704336731.webp 1600w" sizes="(max-width: 767px) 50vw, 33vw" src="media/Z3147533706372130603704704336731.webp" width="1600" height="1600" alt=""></span><figcaption><b>Busch Light</b> Can Crock  </figcaption></figure></a><a class="tile" href="#natural-light-utility-robe"><figure class="m soon"><span class="ti"><div class="soon-box"><span>Coming soon</span></div></span><figcaption><b>Natural Light</b> Utility Robe</figcaption></figure></a><a href="#uk-healthcare"><figure class="m" data-ar="1.0000"><span class="ti"><img loading="lazy" srcset="media/Z3016409906228757699977957901147-720w.webp 720w, media/Z3016409906228757699977957901147.webp 1080w" sizes="(max-width: 767px) 50vw, 33vw" src="media/Z3016409906228757699977957901147.webp" width="1080" height="1080" alt=""></span><figcaption><b>UK HealthCare</b> </figcaption></figure></a><a href="#visitdublin"><figure class="m" data-ar="1.0000"><span class="ti"><img loading="lazy" srcset="media/R3145619674974054111685460919131-720w.webp 720w, media/R3145619674974054111685460919131.webp 1080w" sizes="(max-width: 767px) 50vw, 33vw" src="media/R3145619674974054111685460919131.webp" width="1080" height="1080" alt=""></span><figcaption><b>Visit Dublin</b></figcaption></figure></a></div></main>
 <footer class="ft"><a href="#">© <span class="yr">2026</span> — Rights Reserved</a></footer>
 <section class="ov about" id="p-about" data-title="About" hidden><div class="panel"><div class="cols"><div class="col" style="--span:6"><b>About </b></div><div class="col" style="--span:2"></div><div class="col" style="--span:4"><div style="text-align: right"><a href="#" class="close">Close <span class="x">×</span></a></div></div></div>
@@ -571,6 +611,23 @@ document.addEventListener('click', e => {
 });
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && location.hash) closeOv(); });
 route();
+</script>
+<div class="pv" role="group" aria-label="Preview options">
+  <button data-v="a" class="on">A<span class="lbl"> · Echo</span></button><button data-v="b">B<span class="lbl"> · Punchline</span></button><button data-v="c">C<span class="lbl"> · Billboard</span></button><button data-v="d">D<span class="lbl"> · Column</span></button>
+  <span class="sep"></span><button data-cd class="on"><span class="lbl">With </span>“Creative Director”</button>
+</div>
+<script>
+(() => {
+  const intro = document.querySelector('.intro');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce) { intro.classList.add('pre'); requestAnimationFrame(() => requestAnimationFrame(() => intro.classList.remove('pre'))); }
+  document.querySelectorAll('.pv [data-v]').forEach(b => b.addEventListener('click', () => {
+    intro.dataset.v = b.dataset.v;
+    document.querySelectorAll('.pv [data-v]').forEach(x => x.classList.toggle('on', x === b));
+  }));
+  const cd = document.querySelector('.pv [data-cd]');
+  cd.addEventListener('click', () => { cd.classList.toggle('on'); intro.classList.toggle('no-cd', !cd.classList.contains('on')); });
+})();
 </script>
 </body>
 </html>
