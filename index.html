@@ -55,6 +55,8 @@ main { padding: 0 1rem; }
 
 /* Media */
 .m img, .m video { display: block; width: 100%; height: auto; background: #f3f3f3; }
+/* videos always take their own shape, so cover images cropped differently in Cargo don't resize the box or jump on play */
+.m video { aspect-ratio: var(--ar, 16/9); object-fit: cover; background: #111; }
 .m figcaption { margin-top: .7em; line-height: 1.1; }
 .col > .m[style*="--scale"] { width: var(--scale); }
 .justify { display: flex; gap: var(--gap); align-items: flex-start; }
